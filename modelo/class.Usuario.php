@@ -128,7 +128,7 @@ class Usuario{
     }
     Public function AsociarPoke($nombrepoke){
         if (isset($this->Username)){
-
+buso ID
         }
 
 
