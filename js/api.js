@@ -1,3 +1,4 @@
+// traigo solo 10 pokemones, en caso de querer mas cambiar el valor limit
 const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10';
 
 // Función para obtener los datos de un Pokémon por su URL
@@ -9,7 +10,8 @@ function getPokemonData(url) {
       const pokemon = {
         name: data.name,
         image: data.sprites.front_default,
-        weight: data.weight
+        weight: data.weight,
+        height: data.height
       };
       return pokemon;
     })
@@ -18,7 +20,7 @@ function getPokemonData(url) {
     });
 }
 
-// Función para obtener la lista de Pokémon y luego sus detalles
+
 function getAllPokemon() {
   fetch(apiUrl)
     .then(response => response.json())
@@ -26,12 +28,10 @@ function getAllPokemon() {
       const pokemonList = data.results;
       const pokemonDetailsPromises = pokemonList.map(pokemon => getPokemonData(pokemon.url));
 
-      // Esperar a que todas las promesas se resuelvan
+     
       Promise.all(pokemonDetailsPromises)
         .then(pokemonDetailsArray => {
           console.log('Detalles de los Pokémon:', pokemonDetailsArray);
-          // Aquí puedes manejar los detalles de cada Pokémon como desees
-          // Por ejemplo, mostrar la información en el DOM
           displayPokemonDetails(pokemonDetailsArray);
         });
     })
@@ -40,7 +40,8 @@ function getAllPokemon() {
     });
 }
 
-// Función para mostrar los detalles de los Pokémon en el DOM
+//  mostrar los detalles de los Pokémon en el DOM
+// No encontré los puntos de ataque y defensa, entonces me traigo peso y altura
 function displayPokemonDetails(pokemonDetailsArray) {
   const container = document.getElementById('cardPokemon-container');
   pokemonDetailsArray.forEach(pokemon => {
@@ -49,10 +50,11 @@ function displayPokemonDetails(pokemonDetailsArray) {
       <h3>${pokemon.name}</h3>
       <img src="${pokemon.image}" alt="${pokemon.name}">
       <p>Peso: ${pokemon.weight}</p>
+      <p>Altura: ${pokemon.height}</p>
     `;
     container.appendChild(pokemonElement);
   });
 }
 
-// Llamar a la función para obtener y mostrar los Pokémon
+// consulto a la api
 getAllPokemon();
