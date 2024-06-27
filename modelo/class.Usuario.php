@@ -123,17 +123,30 @@ class Usuario{
 
     public function getID(){
         $daousr=new DAO();
-        $daousr->ejecutarSQL("SELECT ID from usuario where username='{$this->getUsername()}'");
-
+        $res=$daousr->ejecutarSQL("SELECT ID from usuario where username='{$this->getUsername()}'");
+        var_dump($res);
+        return $res['info']['ID'];
     }
-    Public function AsociarPoke($nombrepoke){
+    Public function VincularPoke($nombrepoke){
+       
+        $poke=new personaje($nombrepoke);
         if (isset($this->Username)){
-buso ID
+            $id_usr=$this->getID();
+            $id_personaje=$poke->getID();
         }
 
 
     }
 
+    Public function DesvincularPoke($nombrepoke){
+       
+        $poke=new personaje($nombrepoke);
+        if (isset($this->Username)){
+            $id_usr=$this->getID();
+            $id_personaje=$poke->getID();
+        }
 
+
+    }
     
 }

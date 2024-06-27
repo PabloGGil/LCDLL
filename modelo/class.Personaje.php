@@ -19,7 +19,7 @@ class Personaje{
     //    $this->setDefensa($defensa);
     // }
 
-    public function __construct(private $Nombre, private $Tipo,private $Categoria, private $Ataque, private $Defensa)
+    public function __construct(private $Nombre, private $Tipo="",private $Categoria="", private $Ataque=0, private $Defensa=0)
     {
     /*funcion sin codigo 
     ver  Properties Promotion o Promoted Properties  https://stitcher.io/blog/constructor-promotion-in-php-8
@@ -50,6 +50,13 @@ class Personaje{
         return $this->Defensa;
     }
   
+    public function getID(){
+        $daousr=new DAO();
+        $res=$daousr->ejecutarSQL("SELECT ID from personaje where nombre='{$this->getNombre()}'");
+        return $res['info']['ID'];
+
+
+    }
 
     /*-----------setters------------------*/
 
