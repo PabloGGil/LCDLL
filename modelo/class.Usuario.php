@@ -8,7 +8,7 @@ class Usuario{
     private $Correo; 
     private $Password;
     private $FechaRegistro;
-    private $Grupo="";
+    private $cant="";
 
     public function __construct($nombre="",$apellido="",$username="",$correo="",$password="",$fecha="")
     {
@@ -16,6 +16,7 @@ class Usuario{
        $this->setCorreo($correo);
        $this->setPassword($password);
        $this->setFechaRegistro($fecha);
+       $this->cant=0;
     }
 
     /*-----------getters------------------*/
@@ -130,9 +131,17 @@ class Usuario{
     Public function VincularPoke($nombrepoke){
        
         $poke=new personaje($nombrepoke);
+        if($this->cant>5){
+            echo "Supero la cantidad de 5 poke asociados";
+            return;
+        }
+
         if (isset($this->Username)){
             $id_usr=$this->getID();
             $id_personaje=$poke->getID();
+            $trel=new Relacion();
+            $trel->insertar($id_usr,$id_personaje );
+            $this->cant++;
         }
 
 

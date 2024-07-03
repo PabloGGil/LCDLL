@@ -19,7 +19,7 @@ class Personaje{
     //    $this->setDefensa($defensa);
     // }
 
-    public function __construct(private $Nombre, private $Tipo="",private $Categoria="", private $Ataque=0, private $Defensa=0)
+    public function __construct(private $Nombre,private $imagen="", private $Ataque=0, private $Defensa=0)
     {
     /*funcion sin codigo 
     ver  Properties Promotion o Promoted Properties  https://stitcher.io/blog/constructor-promotion-in-php-8
@@ -34,12 +34,10 @@ class Personaje{
         return $this->Nombre;
     }
 
-    public function getTipo (){
-        return $this->Tipo;
-    }
 
-    public function getCategoria (){
-        return $this->Categoria;
+
+    public function getImagen (){
+        return $this->imagen;
     }
 
     public function getAtaque (){
@@ -64,16 +62,13 @@ class Personaje{
         $this->Nombre=$aux;
     }
 
-    public function setTipo ($aux){
-        $this->Tipo=$aux;
-    }
-
-    public function setCategoria ($aux){
-        $this->Categoria=$aux;
-    }
 
     public function setAtaque ($aux){
         $this->Ataque=$aux;
+    }
+
+    public function setImagen ($aux){
+        $this->imagen=$aux;
     }
 
     public function setDefensa ($aux){
@@ -97,8 +92,8 @@ class Personaje{
 
     public function insertarReg(){
         if(!$this->existe($this->getNombre())){
-            $strSQL="INSERT INTO personaje(nombre,tipo,Categoria,puntos_ataque,puntos_defensa) 
-            VALUES('{$this->getNombre()}','{$this->getTipo()}','{$this->getCategoria()}',{$this->getAtaque()},{$this->getDefensa()})";
+            $strSQL="INSERT INTO personaje(nombre,imagen,puntos_ataque,puntos_defensa) 
+            VALUES('{$this->getNombre()}','{$this->getImagen()}',{$this->getAtaque()},{$this->getDefensa()})";
             echo $strSQL;
             $dao=new DAO();
             $dao->ejecutarSQL($strSQL);
@@ -106,5 +101,5 @@ class Personaje{
             echo " el personaje ya existe";
         }
     }
-    
+   
 }

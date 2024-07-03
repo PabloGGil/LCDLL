@@ -1,68 +1,61 @@
 <?php
 require_once "class.DAO.php";
 
-class Producto{
+class Relacion{
 
     
-    private $Nombre; 
-    private $Tipo; 
-    private $Descripcion;
-    private $Precio;
-    private $comentario;
+    
 
-    public function __construct($nombre,$tipo,$desc,$precio)
+    public function __construct(private $id,private $id_poke,private $id_usr)
     {
-       $this->setNombre($nombre);
-       $this->setTipo($tipo);
-       $this->setDescripcion($desc);
-       $this->setPrecio($precio);
+       
     }
 
     /*-----------getters------------------*/
-    public function getNombre (){
-        return $this->Nombre;
+    public function getid (){
+        return $this->id;
     }
 
-    public function getTipo (){
-        return $this->Tipo;
+    public function getid_poke (){
+        return $this->id_poke;
     }
 
-    public function getDescripcion (){
-        return $this->Descripcion;
+    public function getid_usr (){
+        return $this->id_usr;
     }
 
-    public function getPrecio (){
-        return $this->Precio;
-    }
 
   
 
     /*-----------setters------------------*/
 
-    public function setNombre ($aux){
-        $this->Nombre=$aux;
+    public function setid ($aux){
+        $this->id=$aux;
     }
 
-    public function setTipo ($aux){
-        $this->Tipo=$aux;
+    public function setid_poke ($aux){
+        $this->id_poke=$aux;
     }
 
-    public function setDescripcion ($aux){
-        $this->Descripcion=$aux;
+    public function setid_usr ($aux){
+        $this->id_usr=$aux;
     }
 
-    public function setPrecio ($aux){
-        $this->Precio=$aux;
-    }
+ 
+    
 
     /*-----------metodos------------------*/
     public function consultarBD(){
-
+        $strSQL="select u.username ,p.nombre, p.puntos_ataque ,p.puntos_defensa,p.imagen 
+                from pokemon.usuario u ,pokemon.personaje p ";
+        $dao=new DAO();
+        $data=$dao->ejecutarSQL($strSQL);
+        return $data;
     }
 
-    public function insertarBD(){
+    public function insertar($id_poke,$id_usr){
         echo "..... ACA HAGO EL INSERT.....";
-        $strSQL="INSERT INTO producto(producto,tipo,precio,descripcion) VALUES('{$this->getNombre()}','{$this->getTipo()}','{$this->getPrecio()}','{$this->getDescripcion()}')";
+        $strSQL="INSERT INTO producto(id_poke,id_usr) VALUES('{$this->getid()}','{$this->getid_poke()}','{$this->getid_usr()}')";
         echo $strSQL;
         $dao=new DAO();
         $dao->ejecutarSQL($strSQL);
