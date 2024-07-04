@@ -10,9 +10,9 @@ class Usuario{
     private $FechaRegistro;
     private $cant="";
 
-    public function __construct($nombre="",$apellido="",$username="",$correo="",$password="",$fecha="")
+    public function __construct($nombre="",$apellido="",$correo="",$password="",$fecha="")
     {
-       $this->setUsername($username);
+       $this->setUsername($nombre."-".$apellido);
        $this->setCorreo($correo);
        $this->setPassword($password);
        $this->setFechaRegistro($fecha);
@@ -61,7 +61,7 @@ class Usuario{
     public function consultar(){
         $filtro="";
         $strSQL=" SELECT username,correo,password,fechaRegistro FROM USUARIO ";
-        echo $strSQL;
+        //echo $strSQL;
         $dao=new DAO();
         $data=$dao->ejecutarSQL($strSQL);
         return $data;
@@ -81,7 +81,7 @@ class Usuario{
     public function insertarReg(){
         if(!$this->existe($this->getUsername())){
             $strSQL="INSERT INTO USUARIO(username,correo,password,fechaRegistro) VALUES('{$this->getUsername()}','{$this->getCorreo()}','{$this->getPassword()}',CURDATE())";
-            echo $strSQL;
+            //echo $strSQL;
             $dao=new DAO();
             $dao->ejecutarSQL($strSQL);
         }else{
@@ -92,7 +92,7 @@ class Usuario{
     public function actualizarReg(){
        
         $strSQL="UPDATE USUARIO SET ";
-        echo $strSQL;
+        //echo $strSQL;
         $dao=new DAO();
         $dao->ejecutarSQL($strSQL);
     }
@@ -153,6 +153,9 @@ class Usuario{
         if (isset($this->Username)){
             $id_usr=$this->getID();
             $id_personaje=$poke->getID();
+            $trel=new Relacion();
+            $trel->eliminar($id_usr,$id_personaje );
+            $this->cant--;
         }
 
 

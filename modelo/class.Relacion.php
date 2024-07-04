@@ -3,10 +3,12 @@ require_once "class.DAO.php";
 
 class Relacion{
 
-    
+    private $id;
+    private $id_poke;
+    private $id_usr;
     
 
-    public function __construct(private $id,private $id_poke,private $id_usr)
+    public function __construct()
     {
        
     }
@@ -53,9 +55,16 @@ class Relacion{
         return $data;
     }
 
-    public function insertar($id_poke,$id_usr){
+    public function insertar($id_usr,$id_poke){
         echo "..... ACA HAGO EL INSERT.....";
-        $strSQL="INSERT INTO producto(id_poke,id_usr) VALUES('{$this->getid()}','{$this->getid_poke()}','{$this->getid_usr()}')";
+        $strSQL="INSERT INTO GRUPOS(id_poke,id_usr) VALUES({$this->getid_poke()},{$this->getid_usr()})";
+        echo $strSQL;
+        $dao=new DAO();
+        $dao->ejecutarSQL($strSQL);
+    }
+    public function eliminar($id_usr,$id_poke){
+        echo "..... ACA HAGO EL INSERT.....";
+        $strSQL="DELETE FROM GRUPOS WHERE ID_PERSONAJE='{$this->getid_poke()}' AND ID_USUARIO='{$this->getid_usr()}')";
         echo $strSQL;
         $dao=new DAO();
         $dao->ejecutarSQL($strSQL);

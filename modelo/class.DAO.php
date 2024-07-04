@@ -1,7 +1,7 @@
 <?php
-$dir= __DIR__ . '\\';
-echo $dir;
-require_once $dir ."class.conexionDAO.php";
+
+
+require_once "class.conexionDAO.php";
 class DAO{
 
     private $conn;

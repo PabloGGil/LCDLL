@@ -1,14 +1,19 @@
 <?php
 
 
-require_once ".\\modelo\\class.usuario.php";
-echo "llego al php";
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+// $username = $data['username'];
+// $password = $data['password'];
+
+require_once "..\\modelo\\class.usuario.php";
 
 // --- verificar que los datos necesarios no esten vacios
 
-if(isset($_POST['correo'])&&isset($_POST['password'])){
-    $correo=$_POST['correo'];
-    $password=$_POST['password'];
+if(isset($data['valueEmail'])&&isset($data['valuepass'])){
+    $correo=$data['valueEmail'];
+    $password=$data['valuepass'];
     $usuario=new usuario( );
     if($usuario->LoginOK($correo,$password)){
         $retorno['rc']=0;
@@ -29,4 +34,5 @@ if(isset($_POST['correo'])&&isset($_POST['password'])){
 }
 header('Content-Type: application/json');
 http_response_code(200);
-echo json_encode($retorno, JSON_UNESCAPED_UNICODE);
+echo json_encode($retorno,JSON_PARTIAL_OUTPUT_ON_ERROR);
+

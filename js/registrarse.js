@@ -72,3 +72,33 @@ function datosRegOk(){
     return rta;
 
 }
+
+function ajaxReq(params) {
+    // let contenedorPersonajes = document.getElementById("personajes")
+     let key = document.getElementById("key").textContent;
+     
+ 
+     // var url = "ajax/AjaxInvDB.php?q=puertos&crit=" + crit + "&motor=" + srh;
+     var url = "vista/registro.php?q=consulta" ;
+     fetch(url)
+       .then((response)=>response.json())
+       .then((datos)=>{
+ 
+           console.log(datos)
+        //    datos.coleccion.ambiente.forEach((elementos) => {
+        //        console.log(elementos.nombre)
+        //       // elementos.nombre.forEach((amb) => {
+        //         // console.log(element);
+        //          txt +="<div><h3>"+elementos.nombre+"</h3></div>";
+        //          elementos.puertos.forEach(ports=>{
+        //              console.log(ports);
+        //              txt +="<div class='col-sm-1'>" + ports.toString() + "</div>";
+        //          });
+             
+        //        // });
+        //      }); 
+               
+           list.innerHTML=txt;
+ 
+       });
+   }
