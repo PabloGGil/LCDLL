@@ -11,10 +11,18 @@
 
 const btnlogin = document.getElementById("botonLogin");
 btnlogin.addEventListener("click",validarDatos);
+// const btnalgo=document.getElementById("algo");
+// btnalgo.addEventListener("click",mostrarUsuarios);
+// // const registro = document.getElementById("botonLogin");
+// // registro.addEventListener("click",validarRegistro);
+// function mostrarUsuarios(){
+//     q="consulta";
+//     Dato_enviar={
+//         q
+//     }
+//     ajaxReq(Dato_enviar);
 
-// const registro = document.getElementById("botonLogin");
-// registro.addEventListener("click",validarRegistro);
-
+// }
 
 
 function validarDatos(e) {
@@ -41,7 +49,7 @@ function validarDatos(e) {
             //  })
         }
         ajaxReq(Dato_enviar);
-        alert("el formulario pudo enviar los datos")
+        //alert("el formulario pudo enviar los datos")
     }
 }
 
@@ -90,7 +98,7 @@ function ajaxReq(data) {
     const xhr = new XMLHttpRequest();
 
 //   let selec = document.getElementById("selected").innerText;
-    xhr.open("GET", "vista/login.php");
+    xhr.open("POST", "vista/login.php");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(jsonString);
     xhr.onreadystatechange = function () {
@@ -107,22 +115,5 @@ function ajaxReq(data) {
         }
     }
     
-     // var url = "ajax/AjaxInvDB.php?q=puertos&crit=" + crit + "&motor=" + srh;
-    //  var url = "vista/login.php" ;
-    //  fetch(url,data)
-    //    .then((response)=>{
-    //         response.json();
-    //         console.log (response);
-    //         })
-    //    .then(data => {
-    //         console.log (data);
-    //     // if (data.rc == 0) {
-    //     //     alert('Login exitoso');
-    //     // } else {
-    //     //     alert('Login fallido');
-    //     // }
-       
  
-    //    });
-
 }

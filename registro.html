@@ -22,7 +22,7 @@
         />
         Volver al Inicio
       </a>
-      <a class="volverHome" href="usuario.php">Mostrar Usuarios</a>
+      <a class="volverHome" href="vista/registro.php">Mostrar Usuarios</a>
       >
     </header>
     <main>
@@ -75,6 +75,7 @@
           name="fechaNac"
           required
           placeholder="fecha de nacimiento"
+          
         />
         <div class="TyC">
           <label class="txtCheck" for="terminos"
@@ -92,9 +93,10 @@
         <a class="ir_a_TyC" href="#"
           ><label class="leerTyC">Leer Términos y Condiciones</label></a
         >
-        <input class="boton" type="submit" value="Registrarse" />
+        <input id="botonRegistro" class="boton" type="submit" value="Registrarse" />
         <a class="txtAyuda" href="#">¿Necesitás ayuda?</a>
       </form>
+      <script src="js/registrarse.js"></script>
     </main>
   </body>
 </html>

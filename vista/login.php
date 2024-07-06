@@ -1,7 +1,7 @@
 <?php
 
 
-
+require_once "../modelo/class.Usuario.php";
 $data = json_decode(file_get_contents('php://input'), true);
 
 // $username = $data['username'];
@@ -14,7 +14,7 @@ require_once "..\\modelo\\class.usuario.php";
 if(isset($data['valueEmail'])&&isset($data['valuepass'])){
     $correo=$data['valueEmail'];
     $password=$data['valuepass'];
-    $usuario=new usuario( );
+    $usuario=new Usuario( );
     if($usuario->LoginOK($correo,$password)){
         $retorno['rc']=0;
         $retorno['msgerror']="";

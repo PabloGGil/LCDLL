@@ -19,12 +19,15 @@ class DAO{
             $array['rc']=1;
             $array['info'] =null;
         }else{
-            if ($resultado instanceof mysqli_result){
-                $array['info'] = $resultado->fetch_array(MYSQLI_BOTH);
-                $array['rc']=0;
-                $array['errmsg']="";
-            }
-
+            
+            $array['errmsg']="";
+            $array['rc']=0;
+            $array['info'] =$resultado;
+        }
+        if ($resultado instanceof mysqli_result){
+            $array['info'] = $resultado->fetch_all(  );
+            $array['rc']=0;
+            $array['errmsg']="";
         }
         return $array;
 

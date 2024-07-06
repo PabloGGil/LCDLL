@@ -1,35 +1,32 @@
 <?php
 
-require_once ".\\modelo\\class.Usuario.php";
+require_once "../modelo/class.Usuario.php";
+$data = json_decode(file_get_contents('php://input'), true);
+// $nombre="pablo";
+// $apellido="gabriel";
+// // $username="pablog62@gmail.com";
+// $correo="pablog62@gmail.com";
+// $password="lamarzotti";
+// $fecha="20/06/2024";
 
-$nombre="pablo";
-$apellido="gabriel";
-// $username="pablog62@gmail.com";
-$correo="pablog62@gmail.com";
-$password="lamarzotti";
-$fecha="20/06/2024";
 
 
-
-if($_POST){
-    if(isset($_POST['nombre'])&&isset($_POST['apellido'])&&isset($_POST['correo'])&&isset($_POST['password'])&&isset($_POST['fecha'])){
+if($data['q']){
+    if(isset($data['nombre'])&&isset($data['apellido'])&&isset($data['correo'])&&isset($data['password'])&&isset($data['fecha']))
     {   
-        $nombre=$_POST['nombre'];
-        $apellido=$_POST['apellido'];
+        $nombre=$data['nombre'];
+        $apellido=$data['apellido'];
         // $username="pablog62@gmail.com";
-        $correo=$_POST['correo'];
-        $password=$_POST['password'];
-        $fecha=$_POST['fecha'];
+        $correo=$data['correo'];
+        $password=$data['password'];
+        $fecha=$data['fecha'];
         
         $registro=new Usuario($nombre,$apellido,$correo,$password,$fecha);
-        if(isset($_GET['q']))
+        if(isset($data['q']))
         {
-            switch ($_GET['q']) 
+            switch ($data['q']) 
             {
-                case 'consulta':
-                    $datos=new Usuario();
-                    $retorno=$datos->consultar();
-                    break;
+                
                 case 'alta':
                     $retorno=$registro->insertarReg();
                     break;
@@ -39,6 +36,10 @@ if($_POST){
             }
         
         }
+    }
+    if($data['q']=='consulta'){
+        $datos=new Usuario();
+        $retorno=$datos->consultar();
     }
     header('Content-Type: application/json');
     http_response_code(200);

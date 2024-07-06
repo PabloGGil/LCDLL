@@ -83,10 +83,13 @@ class Usuario{
             $strSQL="INSERT INTO USUARIO(username,correo,password,fechaRegistro) VALUES('{$this->getUsername()}','{$this->getCorreo()}','{$this->getPassword()}',CURDATE())";
             //echo $strSQL;
             $dao=new DAO();
-            $dao->ejecutarSQL($strSQL);
+            $array=$dao->ejecutarSQL($strSQL);
         }else{
-            echo " el username ya existe";
+            $array['info'] = "";
+            $array['rc']=1;
+            $array['errmsg']=" el username ya existe";
         }
+        return $array;
     }
 
     public function actualizarReg(){
@@ -97,10 +100,12 @@ class Usuario{
         $dao->ejecutarSQL($strSQL);
     }
 
-    public function BorrarReg($nombreUsr){
+    public function BorrarReg(){
       
         if(isset($nombreUsr)){
-            $strSQL="DELETE FROM USUARIO WHERE username='{$nombreUsr}'";
+            //  aca borrar primero todos los registros de la tabla grupos
+            
+            $strSQL="DELETE FROM USUARIO WHERE username='{$this->getUsername()}'";
             echo $strSQL;
             $dao=new DAO();
             $dao->ejecutarSQL($strSQL);
@@ -111,7 +116,7 @@ class Usuario{
         $dao=new DAO();
         $login=$dao->ejecutarSQL("select count(username) as cuenta from usuario where correo='{$usuario}' and password='{$password}'");
         if($login['rc']==0){
-            if($login['info']['cuenta']==1){
+            if($login['info']['cuenta']>=1){
                 // login exitoso
                 return true;
             }else{
