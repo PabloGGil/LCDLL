@@ -1,5 +1,6 @@
 const btnalgo=document.getElementById("algo");
 btnalgo.addEventListener("click",mostrarUsuarios);
+
 // const registro = document.getElementById("botonLogin");
 // registro.addEventListener("click",validarRegistro);
 function mostrarUsuarios(){
@@ -7,7 +8,7 @@ function mostrarUsuarios(){
     Dato_enviar={
         q
     }
-    ajaxReq(Dato_enviar);
+    ajaxReq(Dato_enviar,"vista/usuario.php");
 
 }
 
@@ -80,9 +81,10 @@ getAllPokemon();
 // btnAgregar.addEventListener("click",agregar,false);
 function agregar(nombre,peso,altura,imagen ){
   console.log("aprete boton" + nombre)
+  username=document.getElementById("username").outerText;
   q="consulta";
   Dato_enviar={
-      q=
+      username,nombre,peso,altura,imagen
   }
   ajaxReq(Dato_enviar,"vista/equipo.php");
 
@@ -98,7 +100,7 @@ function quitar(nombre){
     const xhr = new XMLHttpRequest();
 
 //   let selec = document.getElementById("selected").innerText;
-    xhr.open("POST", "vista/registro.php");
+    xhr.open("POST", form);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(jsonString);
     xhr.onreadystatechange = function () {
