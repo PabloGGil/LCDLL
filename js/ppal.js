@@ -82,9 +82,9 @@ getAllPokemon();
 function agregar(nombre,peso,altura,imagen ){
   console.log("aprete boton" + nombre)
   username=document.getElementById("username").outerText;
-  q="consulta";
+  q="alta";
   Dato_enviar={
-      username,nombre,peso,altura,imagen
+      q,username,nombre,peso,altura,imagen
   }
   ajaxReq(Dato_enviar,"vista/equipo.php");
 
@@ -92,7 +92,12 @@ function agregar(nombre,peso,altura,imagen ){
 
 function quitar(nombre){
   console.log("aprete boton quitar"+ nombre)
-
+  username=document.getElementById("username").outerText;
+  q="baja";
+  Dato_enviar={
+      q,username
+  }
+  ajaxReq(Dato_enviar,"vista/equipo.php");
 }
   function ajaxReq(data,form) {
     
@@ -105,15 +110,15 @@ function quitar(nombre){
     xhr.send(jsonString);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-            let respuesta =JSON.parse( this.responseText);
-            if (respuesta.rc){
-                // estado.innerHTML = respuesta.msgerror;
-                alert(respuesta.msgerror);
-            }else{
-                console.log(respuesta.info)
-                
-            }
+          console.log(this.responseText);
+          let respuesta =JSON.parse( this.responseText);
+          if (respuesta.rc==0){
+              // estado.innerHTML = respuesta.msgerror;
+              console.log(respuesta.info);
+          }else{
+              alert(respuesta.errmsg);
+              
+          }
         }
     }
     
