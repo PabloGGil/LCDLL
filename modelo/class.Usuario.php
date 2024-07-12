@@ -171,8 +171,8 @@ class Usuario{
             $id_usr=$this->getID();
             $id_personaje=$poke->getID();
             $trel=new Relacion($id_personaje,$id_usr);
-            $trel->eliminar( );
-           
+            $rta=$trel->eliminar( );
+           return $rta;
         // }
 
 

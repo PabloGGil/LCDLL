@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,13 +15,13 @@
     <title>EligeTuEquipo</title>
   </head>
   <body>
-    
+    <?php session start(); ?>
     <header>
       <nav class="navbar navbar-expand-lg bg-secondary custom-navbar">
         
         <div class="container-fluid">
           <a class="navbar-brand text-warning h2" href="#">Elige tu Equipo</a>
-          <p id="username">pablog62@gmail.com  </p>
+        
           <button
             class="navbar-toggler"
             type="button"
@@ -47,6 +48,11 @@
               <li class="nav-item">
                 <a id="algo" class="nav-link text-warning h3" href="#">Algo</a>
               </li>
+              <li class="nav-item">
+          
+                <a id="username" class="nav-link text-warning h3" >pablog62@gmail.com</a>
+              </li>
+              
             </ul>
             <span class="nav-item">
               <img
@@ -61,14 +67,9 @@
     </header>
     <main class="bodyHome">
       <h1>¡Selecciona tu Equipo Ganador!</h1>
+      <div id="Equipo-container"></div>
       <section class="SeleccionaEquipo">
-        <h3>Elige 5 para formar tu equipo</h3>
-        <p>
-          <!-- AQUÍ VA LA CONEXION A LA API QUE MUESTRA LAS CARDS DE LA POKEDEX CON
-          NOMBRE, NRO. DE ORDEN, TIPO, ATAQUE Y DEFENSA Y UN BOTÓN PARA ELEGIRLO -->
-       
-        </p>
-       
+        <h3>Elige a 5 para formar tu equipo</h3>
         <div id="cardPokemon-container"></div>
       </section>
     </main>
@@ -101,7 +102,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link text-warning h3" href="el_equipo.html"
-                  >CaC - PHP.Com 24144 - TP Final - Equipo Pokémon</a
+                  >Quienes somos</a
                 >
               </li>
             </ul>
@@ -117,10 +118,11 @@
         </div>
       </nav>
     </footer>
-    <!-- <script src="script.js"></script> -->
-    <!-- Este link para el js -->
-    <!-- <script src="js\api.js"></script> -->
-    <script src="js\ppal.js"></script>
-    <!-- Este link para la API -->
+    <script src="js/ppal.js"></script>
+    <script src="js/api.js"></script>
+    <!-- <script src="js/login.js"></script>
+    <script src="js/registrarse.js"></script> -->
+
+    <!-- Estos links para los js -->
   </body>
 </html>

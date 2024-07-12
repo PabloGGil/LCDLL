@@ -110,7 +110,7 @@ function ajaxReq(data) {
                 alert(respuesta.msgerror);
             }else{
                 alert("login exitoso");
-                
+                location.href ="index.html";
             }
         }
     }

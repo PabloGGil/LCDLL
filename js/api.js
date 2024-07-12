@@ -1,5 +1,5 @@
 // traigo solo 10 pokemones, en caso de querer mas cambiar el valor limit
-const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10';
+const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=30';
 
 // Función para obtener los datos de un Pokémon por su URL
 function getPokemonData(url) {
@@ -61,8 +61,12 @@ function displayPokemonDetails(pokemonDetailsArray) {
   });
 }
 
+
+
+
 // consulto a la api
 getAllPokemon();
+
 
 // btnAgregar=document.getElementById("btnAgregar");
 // btnAgregar.addEventListener("click",agregar,false);

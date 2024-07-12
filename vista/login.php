@@ -8,7 +8,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 // $password = $data['password'];
 
 require_once "..\\modelo\\class.usuario.php";
-
+session_start();
 // --- verificar que los datos necesarios no esten vacios
 
 if(isset($data['valueEmail'])&&isset($data['valuepass'])){
@@ -19,6 +19,9 @@ if(isset($data['valueEmail'])&&isset($data['valuepass'])){
         $retorno['rc']=0;
         $retorno['msgerror']="";
         $retorno['info']=true;
+        $_SESSION['username']=$correo;
+        
+    
     }
     else{
         $retorno['rc']=1;
@@ -35,4 +38,4 @@ if(isset($data['valueEmail'])&&isset($data['valuepass'])){
 header('Content-Type: application/json');
 http_response_code(200);
 echo json_encode($retorno,JSON_PARTIAL_OUTPUT_ON_ERROR);
-
+// header('Location: index.html');

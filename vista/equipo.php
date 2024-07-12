@@ -7,10 +7,10 @@ variables que vienen del front
 require_once "../modelo/class.Personaje.php";
 require_once "../modelo/class.Usuario.php";
 $data = json_decode(file_get_contents('php://input'), true);
-
+// $_SESSION['username'];
 // if($_POST){
     if($data['q']=="alta"){
-        if(isset($data['username'])&&isset($data['nombre'])&&isset($data['imagen'])&&isset($data['peso'])&&isset($data['altura'])){
+        if(isset( $data['username'])&&isset($data['nombre'])&&isset($data['imagen'])&&isset($data['peso'])&&isset($data['altura'])){
             $username  =  $data['username'];       
             $nombrePoke  =  $data['nombre'];
             $imagen  =  $data['imagen'];

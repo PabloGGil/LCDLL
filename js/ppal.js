@@ -1,3 +1,4 @@
+const urlEquipo="../vista/modelo.php";
 const btnalgo=document.getElementById("algo");
 btnalgo.addEventListener("click",mostrarUsuarios);
 
@@ -99,8 +100,27 @@ function quitar(nombre){
   }
   ajaxReq(Dato_enviar,"vista/equipo.php");
 }
-  function ajaxReq(data,form) {
-    
+
+function MostrarEquipo(pokemonDetailsArray){
+  const container = document.getElementById('Equipo-container');
+  pokemonDetailsArray.forEach(pokemon => {
+    const pokemonElement = document.createElement('div');
+    pokemonElement.innerHTML = `
+      <h3>${pokemon.name}</h3>
+      <img src="${pokemon.image}" alt="${pokemon.name}">
+      <p>Peso: ${pokemon.weight}</p>
+      <p>Altura: ${pokemon.height}</p>
+      <div >
+        <input id="btnAgregar" class="boton" onclick="agregar('${pokemon.name}','${pokemon.weight}','${pokemon.height}','${pokemon.image}')" value="Agregar">
+        <input id="btnQuitar"  class="boton" onclick="quitar('${pokemon.name}')" value="quitar">
+      </div>
+      
+    `;
+    container.appendChild(pokemonElement);
+  });
+
+}
+  function ajaxReq(data,form) { 
     const jsonString = JSON.stringify(data);
     const xhr = new XMLHttpRequest();
 
@@ -114,7 +134,7 @@ function quitar(nombre){
           let respuesta =JSON.parse( this.responseText);
           if (respuesta.rc==0){
               // estado.innerHTML = respuesta.msgerror;
-              console.log(respuesta.info);
+              MostrarEquipo(respuesta.info);
           }else{
               alert(respuesta.errmsg);
               
