@@ -56,7 +56,14 @@ footer ul li {
   position: relative;
   z-index: 900;
 }
-
+#miEquipo-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  scroll-margin-top: 0.7em;
+  position: relative;
+  z-index: 900;
+}
 .pokemon-card {
   width: 200px;
   height: 300px;

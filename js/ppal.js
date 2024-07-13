@@ -66,16 +66,36 @@ function displayPokemonDetails(pokemonDetailsArray) {
       <p>Altura: ${pokemon.height}</p>
       <div >
         <input id="btnAgregar" class="boton" onclick="agregar('${pokemon.name}','${pokemon.weight}','${pokemon.height}','${pokemon.image}')" value="Agregar">
-        <input id="btnQuitar"  class="boton" onclick="quitar('${pokemon.name}')" value="Quitar">
+        
       </div>
       
     `;
     container.appendChild(pokemonElement);
   });
 }
-
+function formatEquipo(pokemonDetailsArray){
+  const container = document.getElementById('miEquipo-container');
+  pokemonDetailsArray.forEach(pokemon => {
+    const pokemonElement = document.createElement('div');
+    pokemonElement.classList.add("pokemon-card");
+    pokemonElement.innerHTML =  `
+      <h3>${pokemon.nombre}</h3>
+      <img src="${pokemon.imagen}" alt="${pokemon.name}">
+      <p>Peso: ${pokemon.altura}</p>
+      <p>Altura: ${pokemon.peso}</p>
+      <div >
+          <input id="btnQuitar"  class="boton" onclick="quitar('${pokemon.nombre}')" value="quitar">
+      </div>
+      
+      `;
+    container.appendChild(pokemonElement);
+  });
+  // location.href ="index.html";
+}
 // consulto a la api
 getAllPokemon();
+
+MostrarEquipo();
 
 // btnAgregar=document.getElementById("btnAgregar");
 // btnAgregar.addEventListener("click",agregar,false);
@@ -87,6 +107,7 @@ function agregar(nombre,peso,altura,imagen ){
       q,username,nombre,peso,altura,imagen
   }
   ajaxReq(Dato_enviar,"vista/equipo.php");
+  location.reload();
 
 }
 
@@ -98,27 +119,22 @@ function quitar(nombre){
       q,username,nombre
   }
   ajaxReq(Dato_enviar,"vista/equipo.php");
+  location.reload();
+  
 }
 
-function MostrarEquipo(pokemonDetailsArray){
-  const container = document.getElementById('Equipo-container');
-  pokemonDetailsArray.forEach(pokemon => {
-    const pokemonElement = document.createElement('div');
-    pokemonElement.innerHTML = `
-      <h3>${pokemon.name}</h3>
-      <img src="${pokemon.image}" alt="${pokemon.name}">
-      <p>Peso: ${pokemon.weight}</p>
-      <p>Altura: ${pokemon.height}</p>
-      <div >
-        <input id="btnAgregar" class="boton" onclick="agregar('${pokemon.name}','${pokemon.weight}','${pokemon.height}','${pokemon.image}')" value="Agregar">
-        <input id="btnQuitar"  class="boton" onclick="quitar('${pokemon.name}')" value="quitar">
-      </div>
-      
-    `;
-    container.appendChild(pokemonElement);
-  });
+function MostrarEquipo(){
+  q="consulta";
+  username=document.getElementById("username").outerText;
+  Dato_enviar={
+    q,username
+  }
+  ajaxReq(Dato_enviar,"vista/equipo.php");
+  
 
 }
+
+
   function ajaxReq(data,form) { 
     const jsonString = JSON.stringify(data);
     const xhr = new XMLHttpRequest();
@@ -133,7 +149,7 @@ function MostrarEquipo(pokemonDetailsArray){
           let respuesta =JSON.parse( this.responseText);
           if (respuesta.rc==0){
               // estado.innerHTML = respuesta.msgerror;
-              MostrarEquipo(respuesta.info);
+              formatEquipo(respuesta.info);
           }else{
               alert(respuesta.errmsg);
               
@@ -141,5 +157,4 @@ function MostrarEquipo(pokemonDetailsArray){
         }
     }
     
- 
 }

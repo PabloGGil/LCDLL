@@ -48,13 +48,13 @@ class Relacion{
     
 
     /*-----------metodos------------------*/
-    public function consultarBD(){
-        $strSQL="select u.username ,p.nombre, p.alto ,p.peso,p.imagen 
-                from pokemon.usuario u ,pokemon.personaje p ";
-        $dao=new DAO();
-        $data=$dao->ejecutarSQL($strSQL);
-        return $data;
-    }
+    // public function consultar(){
+    //     $strSQL="select p.nombre, p.alto ,p.peso,p.imagen 
+    //             from pokemon.usuario u ,pokemon.personaje p ";
+    //     $dao=new DAO();
+    //     $data=$dao->ejecutarSQL($strSQL);
+    //     return $data;
+    // }
     public function ExisteRel(){
         $strSQL=" SELECT count(id) as cuenta FROM GRUPOS where id_personaje={$this->getid_poke()} AND id_usuario={$this->getid_usr()}";
         $dao=new DAO();

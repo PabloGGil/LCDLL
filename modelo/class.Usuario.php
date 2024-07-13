@@ -165,7 +165,7 @@ class Usuario{
 
     Public function DesvincularPoke($nombrepoke){
        
-           
+         
         // if (isset($this->Username)){
             $poke=new personaje($nombrepoke);
             $id_usr=$this->getID();
@@ -173,6 +173,19 @@ class Usuario{
             $trel=new Relacion($id_personaje,$id_usr);
             $rta=$trel->eliminar( );
            return $rta;
+        // }
+
+
+    } 
+    Public function consultarPoke($username){
+       
+        $id_usuario=$this->getID();
+        // if (isset($this->Username)){
+        $strSQL="SELECT p.nombre,p.altura,p.peso,p.imagen FROM grupos g,personaje p WHERE g.id_usuario={$id_usuario} and g.id_personaje=p.id; ";
+        $dao=new DAO();
+        $data=$dao->ejecutarSQL($strSQL);
+        return $data;
+        
         // }
 
 

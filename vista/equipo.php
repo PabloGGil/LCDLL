@@ -9,7 +9,14 @@ require_once "../modelo/class.Usuario.php";
 $data = json_decode(file_get_contents('php://input'), true);
 // $_SESSION['username'];
 // if($_POST){
-    if($data['q']=="alta"){
+switch  ($data['q']){  
+    case "consulta":{
+        $relacion=new Usuario( $data['username']);
+        $retorno=$relacion->consultarPoke($data['username']);
+    }
+    break;
+    case "alta":
+        {
         if(isset( $data['username'])&&isset($data['nombre'])&&isset($data['imagen'])&&isset($data['peso'])&&isset($data['altura'])){
             $username  =  $data['username'];       
             $nombrePoke  =  $data['nombre'];
@@ -21,20 +28,15 @@ $data = json_decode(file_get_contents('php://input'), true);
             //if($retorno['rc']==0){
                 $grupo=new Usuario($username);
                 $retorno=$grupo->VincularPoke($nombrePoke);
-            //}
-            // else{
-
-            // }
-        }else{
-            echo "error";
-        }
-    }else{
+        }}break;
+       
+    case "baja":{
         $username  =  $data['username'];  
         $nombrePoke  =  $data['nombre'];   
         $grupo=new Usuario($username);
         $retorno=$grupo->DesvincularPoke($nombrePoke);
-    }
-
+        }
+}
 header('Content-Type: application/json');
 http_response_code(200);
 echo json_encode($retorno,JSON_PARTIAL_OUTPUT_ON_ERROR);
