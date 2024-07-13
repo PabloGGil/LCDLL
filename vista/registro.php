@@ -12,16 +12,16 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 
 if($data['q']){
-    if(isset($data['nombre'])&&isset($data['apellido'])&&isset($data['correo'])&&isset($data['password'])&&isset($data['fecha']))
+    if(isset($data['nombre'])&&isset($data['apellido'])&&isset($data['correo'])&&isset($data['password'])&&isset($data['fechaNac']))
     {   
         $nombre=$data['nombre'];
         $apellido=$data['apellido'];
         // $username="pablog62@gmail.com";
         $correo=$data['correo'];
         $password=$data['password'];
-        $fecha=$data['fecha'];
+        $fecha=$data['fechaNac'];
         
-        $registro=new Usuario($nombre,$apellido,$correo,$password,$fecha);
+        $registro=new Usuario($nombre,$apellido,$correo,$password,$fechaNac);
         if(isset($data['q']))
         {
             switch ($data['q']) 
@@ -36,6 +36,10 @@ if($data['q']){
             }
         
         }
+    }else{
+        $retorno['info']="";
+        $retorno['rc']=1;
+        $retorno['errmsg']="ALgun campo esta vacío, no se dio de alta el registro";
     }
     if($data['q']=='consulta'){
         $datos=new Usuario();

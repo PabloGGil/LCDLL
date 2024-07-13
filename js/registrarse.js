@@ -3,12 +3,11 @@
 const registro = document.getElementById("botonRegistro");
 registro.addEventListener("click",validarRegistro);
 
-
 function validarRegistro(e){
-    let correo = document.getElementById("email").value; 
+    let correo = document.getElementById("correo").value; 
     let nombre = document.getElementById("nombre").value; 
     let apellido = document.getElementById("apellido").value; 
-    let fecha = document.getElementById("fechaNac").value; 
+    let fechaNac = document.getElementById("fechaNac").value; 
     let password = document.getElementById("contraseña").value; 
     let valideta=datosRegOk()
     if (!valideta.rs) {
@@ -18,20 +17,21 @@ function validarRegistro(e){
         e.preventDefault(); // Evita que el formulario se envíe si hay errores de validación
         alert(valideta.error)
    } else {
-        // Si la validación del formulario es exitosa, muestra un mensaje en la consola
-        q="alta";
-        Dato_enviar={
-            q,correo,nombre,apellido,fecha,password
-        }
-        ajaxReq(Dato_enviar);
-       
-        //alert("el formulario pudo enviar los datos")
+        // // Si la validación del formulario es exitosa, muestra un mensaje en la consola
+        // console.log('El formulario es válido. Enviar datos...');
+        alert("el formulario pudo enviar los datos")
+          // Si la validación del formulario es exitosa, muestra un mensaje en la consola
+          q="alta";
+          Dato_enviar={
+              q,correo,nombre,apellido,fechaNac,password
+          }
+          ajaxReq(Dato_enviar);
     }
 }
 
 function datosRegOk(){
      let rta=[];
-     rta[0]= validarCorreo('email');
+     rta[0]= validarCorreo('correo');
      rta[1]= validarTexto('nombre'); // Validar campo de contraseña
      rta[2]= validarTexto('apellido');
      rta[3]= validarFecha('fechaNac');
